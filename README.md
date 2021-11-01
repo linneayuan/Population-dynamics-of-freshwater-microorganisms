@@ -1,1 +1,1 @@
-# Population-dynamics-of-freshwater-microorganisms
+# Population dynamics of freshwater microorganisms
