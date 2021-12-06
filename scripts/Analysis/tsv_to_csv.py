@@ -1,18 +1,16 @@
-#Script that takes the output from calculating coverage and inserts it into the existing dataset
 import pandas as pd
 import csv
 import sys
 import os
 
 #Path to existing file that was used to plot all samples from freshwater with geo location 
-ex_filename = '/Users/linnea/Desktop/tillampad_bioinf/Population-dynamics-of-freshwater-microorganisms/data/geo_data_containing_organisms.csv'
+ex_filename = '/proj/snic2021-22-602/data/geo_data_contains_organisms.csv'
 #Read as dataframe
-df_ex = pd.read_csv(ex_filename, sep=',', index_col=0)
+df_ex = pd.read_csv(ex_filename, sep=';', index_col=0)
 #Add new column that will contain the coverage
-df_ex.insert(2, 'Average_depth', '')
 
 #Directory of tsv files from calculating the coverage
-dir = '/Users/linnea/Desktop/tsv_files/'
+dir = '/proj/snic2021-22-602/analyses/Mapping_Coverage_results/tsv_files/'
 
 for file in os.listdir(dir):
     accession = []
@@ -28,15 +26,17 @@ for file in os.listdir(dir):
     #Inserting a column of accession numbers only and setting them as index
     df_in['Accession'] = accession
     df_in.set_index('Accession', inplace=True)
+    df_in = df_in.drop(["metaname"], axis=1)
 
     #Seeing which accession numbers in the dataset with coverage matches the accesssions in existing dataset
-    for index, row in df_ex.iterrows(): 
-        if index in accession:
-            df_ex.at[index,'Average_depth']= df_in['avg_depth'][index]      #Add the coverage information to the existing dataset
+    #for index, row in df_ex.iterrows(): 
+    #    if index in accession:
+    #        df_ex.at[index,'Average_depth']= df_in['avg_depth'][index]      #Add the coverage information to the existing dataset
     
+    merge = pd.merge(df_ex, df_in, how="left", left_index=True, right_index=True)
     #Getting the organism name
     org = file.split('_')
     org = org[1].split('.')
     org = org[0]
     #Making a csv file containing geo location and coverage of organism
-    df_ex.to_csv('/Users/linnea/Desktop/tillampad_bioinf/Population-dynamics-of-freshwater-microorganisms/data/loc_cov_'+org+'.csv', encoding='utf-8')
+    merge.to_csv('/proj/snic2021-22-602/analyses/Average_depth_files/geo_cov_'+org+'.csv', encoding='utf-8')
