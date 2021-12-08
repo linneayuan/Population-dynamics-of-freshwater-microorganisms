@@ -4,8 +4,9 @@
 # new columns, latitude and longitude separately. The original data is still included
 # in the output.  
 import pandas as pd
+import sys
 
-filename = '/Users/linnea/Desktop/tillampad_bioinf/Population-dynamics-of-freshwater-microorganisms/data/unconverted_data.csv'
+filename = str(sys.argv[1])
 lat = []
 long = []
 coordinates = []
