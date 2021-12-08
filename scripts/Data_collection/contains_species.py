@@ -1,15 +1,17 @@
 # Script that checks a list of the samples containing species 
 # of interest agains the data set and adds a column in the data
 # that specifies if the sample contains the species or not 
+# Running the script: python contains_species.py input_file text_file
 import pandas as pd 
+import sys
 
-filename = '/Users/linnea/Desktop/tillampad_bioinf/Population-dynamics-of-freshwater-microorganisms/data/coordinate_data.csv'
-idfile = '/Users/linnea/Desktop/tillampad_bioinf/Population-dynamics-of-freshwater-microorganisms/data/id_contains_org.txt'
+filename = str(sys.argv[1])
+idfile = str(sys.argv[2])
 ids = []
 contains_org = []
 
 # Load data
-df = pd.read_csv(filename, sep=';', index_col=0)
+df = pd.read_csv(filename, sep=',', index_col=0)
 
 # Store IDs from text file in list 
 with open(idfile) as infile:
