@@ -36,7 +36,7 @@ organisms_duplicated = organisms_of_interest.index.duplicated(keep="first")
 no_duplicate_organisms = organisms_of_interest[~organisms_duplicated]
 
 #Path to accessions_coordinates file and creating dataframe
-accessions_coordinates = '/home/chelsea/Dokument/X5/Slutkursen/Project data/accessions_coordinates.csv'
+accessions_coordinates = '/home/chelsea/Dokument/X5/Slutkursen/accessions_coordinates.csv'
 df_accessions_coordinates = pd.read_csv(accessions_coordinates, sep=',', index_col=0)
 
 #Merge acccesions_coordinates with no_duplicate_organisms
@@ -44,12 +44,12 @@ merge = pd.merge(df_accessions_coordinates, no_duplicate_organisms, how="inner",
 merge.index.name = 'ID'
 
 #Create CSV file
-merge.to_csv('/home/chelsea/Dokument/X5/Slutkursen/Project data/final_sra.csv', encoding='utf-8')
+merge.to_csv('/home/chelsea/Dokument/X5/Slutkursen/Project data/final_sra_river.csv', encoding='utf-8')
 
 #Create .txt file
 to_txt = merge
 to_txt['ID'] = to_txt.index
 to_txt = to_txt[['ID']]
-to_txt.to_csv('/home/chelsea/Dokument/X5/Slutkursen/Project data/ID_contains_org', header=False, index=False, sep='\n', mode='a')
+to_txt.to_csv('/home/chelsea/Dokument/X5/Slutkursen/Project data/ID_contains_org.txt', header=False, index=False, sep='\n', mode='a')
 
 
