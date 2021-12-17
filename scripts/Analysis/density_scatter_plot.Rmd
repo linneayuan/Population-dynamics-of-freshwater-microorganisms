@@ -1,0 +1,30 @@
+library(ggplot2)
+library(viridis)
+
+### Read in tables from csv
+all <- read.table("/Users/[FILE].csv", header=TRUE, sep=",")
+
+### Calculate density
+get_density <- function(x, y, ...) {
+  dens <- MASS::kde2d(x, y, ...)
+  ix <- findInterval(x, dens$x)
+  iy <- findInterval(y, dens$y)
+  ii <- cbind(ix, iy)
+  return(dens$z[ii])
+}
+
+### Density plot
+all$density <- get_density(all$spatdist, all$nucdiff, h = c(120, 0.1), n = 1000)
+densdots <- ggplot(all) +
+              coord_cartesian(xlim = c(110, 3380), ylim = c(0.07, 1.93)) +
+              theme_bw() +
+              scale_x_continuous(breaks = c(0,500,1000,1500,2000,2500,3000,3500)) +
+              scale_y_continuous(breaks = c(0,0.5,1,1.5,2)) +
+              theme(axis.text = element_text(size=14), axis.title = element_text(size=14, face="bold")) +
+              geom_hline(yintercept=median(all$nucdiff), color="black", size=1) +
+              geom_point(aes(spatdist, nucdiff, color = density), size=1) + scale_color_viridis()
+
+### Plot to pdf
+pdf("/Users/[FILE].pdf", width=9.5, height=6)
+print(densdots)
+dev.off()
