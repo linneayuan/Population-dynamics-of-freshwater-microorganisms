@@ -3,26 +3,28 @@ library(ggplot2)
 library(vegan)
 
 ### Read in tables from csv
-all <- read.table("/Users/[FILE].csv", header=TRUE, sep=",")
-
-### Turn distance tables into distance matrices
-# Make undirected so that matrix will be symmetric
-undir <- graph.data.frame(all, directed=FALSE)
-# Turn into matrix
-spatdist_matrix <- get.adjacency(undir, attr="spatdist", sparse=FALSE)
-nucdiff_matrix <- get.adjacency(undir, attr="nucdiff", sparse=FALSE)
+all <- read.csv2(file.choose(), header=TRUE, sep="\t")
+all[is.na(all)] <- 0
+allnames<-all[,1]
+row.names(all)<-allnames
+all<-all[,-1]
+for(k in 1:nrow(all)){
+all[,k]<-as.numeric(all[,k])
+}
+coord<-data.frame(coord)
 
 ### Calculate Mantel test
-mantel_out <- mantel(nucdiff_matrix, spatdist_matrix, method="spearman", permutations=1000)
+mantel_out <- mantel(all, coord, method="spearman", permutations=1000)
 
 ### Calculate and plot Mantel correlograms
 # Option A: Use Sturges equations to set the number of distance classes
-Correlo_Sturges <- mantel.correlog(nucdiff_matrix, spatdist_matrix, n.class=0, break.pts=NULL, cutoff=FALSE, r.type="spearman", nperm=1000, mult="holm", progressive=TRUE)
-pdf("/User/[FILE].pdf", width=7, height=4)
+Correlo_Sturges <- mantel.correlog(all, coord, n.class=0, break.pts=NULL, cutoff=FALSE, r.type="spearman", nperm=1000, mult="holm", progressive=TRUE)
+pdf("Filename.pdf", width=7, height=4)
 print(plot(Correlo_Sturges))
 dev.off()
 # Option B: Set distance classes according to equidistant break points (n.class)
-Correlo_Holm <- mantel.correlog(nucdiff_matrix, spatdist_matrix, n.class=20, break.pts=NULL, cutoff=FALSE, r.type="spearman", nperm=1000, mult="holm", progressive=TRUE)
-pdf("/Users/[FILE].pdf", width=7, height=4)
+Correlo_Holm <- mantel.correlog(all, coord, n.class=20, break.pts=NULL, cutoff=FALSE, r.type="spearman", nperm=1000, mult="holm", progressive=TRUE)
+pdf("Filenametwo.pdf", width=7, height=4)
 print(plot(Correlo_Holm))
 dev.off()
+
