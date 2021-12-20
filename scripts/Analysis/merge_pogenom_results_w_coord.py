@@ -6,17 +6,18 @@ Created on Fri Dec 17 12:17:11 2021
 @author: chelsea
 """
 import pandas as pd
-
-#Read csv with accessions from pogenom results
-accessions = '/home/chelsea/Dokument/X5/Slutkursen/pogenom_coordinates/FspIIIbA1_accessions.csv'
-df_accessions = pd.read_csv(accessions, sep=',', index_col=0) #OBS SPARADE DENNA SOM CSV
+import os
 
 #Read csv with full dataset including accessions and coordinates
-matthias_and_366 = '/home/chelsea/Dokument/X5/Slutkursen/geo_data_contains_639_organisms.csv'
-df_matthias_366 = pd.read_csv(matthias_and_366, sep=',', index_col=0) #OBS SPARADE DENNA SOM CSV
+all_organisms = '/proj/snic2021-22-602/data/geo_data_contains_639_organisms.csv'
+df_all_organisms = pd.read_csv(all_organisms, sep=',', index_col=0)
 
-#Merge accessions from pogenom with the full dataset to get pogenom accessions with coordinates
-merge = pd.merge(df_matthias_366, df_accessions, how="right", left_index=True, right_index=True)
+#Define directory in which each organisms result directory lies
+dir = '/proj/snic2021-22-602/analyses/POGENOM_results/'
 
-#save as csv
-merge.to_csv('/home/chelsea/Dokument/X5/Slutkursen/FspIIIbA1_accessions_coordinates.csv', encoding='utf-8')
+#Merge pogenom accessions with coordinates by iterating over each organism POGENOM result directory 
+for organism_dir in os.listdir(dir): 
+	df_in = pd.read_csv(dir+organism_dir+'/'+organism_dir+'_accessions.csv', sep = ',', index_col=0)
+	#Merge accessions from pogenom with the full dataset to get pogenom accessions with coordinates
+	merge = pd.merge(df_all_organisms, df_in, how="right", left_index=True, right_index=True)
+	merge.to_csv(dir+organism_dir+'/'+organism_dir+'_accessions_coordinates.csv', encoding='utf-8')
