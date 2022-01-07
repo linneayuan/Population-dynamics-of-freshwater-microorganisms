@@ -8,4 +8,4 @@
 module load bioinfotools
 module load python3/3.8.7
 
-python3 tsv_to_csv.py
+python3 split_to_organisms.py
