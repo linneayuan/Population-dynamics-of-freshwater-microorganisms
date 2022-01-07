@@ -69,8 +69,8 @@ library(ggplot2)
 library(ggrepel)
 
 #Prepare for plot
-group <- rep(c("FspIIIbA1\nrho=0.764\np-value=<0.001", "Fubi\nrho=0.415\np-value=<0.001", "Mekk\nrho=0.0296\np-value=0.12", 
-               "Muni\nrho=0.898\np-value=<0.001", "Nabu\nrho=0.955\np-value=<0.001", "Pver\nrho=0.627\np-value=<0.001"), 
+group <- rep(c("FspIIIbA1\nrho=0.764\np-value<0.001", "Fubi\nrho=0.415\np-value<0.001", "Mekk\nrho=0.0296\np-value=0.12", 
+               "Muni\nrho=0.898\np-value<0.001", "Nabu\nrho=0.955\np-value<0.001", "Pver\nrho=0.627\np-value<0.001"), 
                each=80)
 duration <- c(fsp, fubi, mekk, muni, nabu, pver)
 dat <- data.frame(group=group, duration=duration)
