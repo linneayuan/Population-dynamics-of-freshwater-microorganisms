@@ -24,14 +24,14 @@ You will need to place the following files in the folder Raw_data:
 The pipeline is computationally heavy so slurm is advised
 
 Run with command:
-bash prescreening_pipeline.sh <fasta file with  references for mapping> <txt file with accessions> <csv file with accessions and coordinates>
+> bash prescreening_pipeline.sh <fasta file with  references for mapping> <txt file with accessions> <csv file with accessions and coordinates>
 
 # Downloading full dataset
 If you want to download full sequences the following script is provided: download_complete_genomes.sh is provided.
 The script is computationally heavy so slurm is advised
 
 Run with command:
-bash download_complete_genomes.sh <output directory for your .fastq files>
+> bash download_complete_genomes.sh <output directory for your .fastq files>
   
 
 
