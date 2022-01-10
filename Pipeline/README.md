@@ -16,15 +16,15 @@ You will need to place the following files in the folder Raw_data:
 
 * A .txt file with accession numbers, separated by row break. The accession numbers must start with ERR, SRR or DRR.
 
-* A .csv file with accessions and coordinates. Note that this file must have one column called <Latitude> with latitude coordinates in
-  the decimal degree coordinate system, as well as one column called <Longitude> with longitude coordinates in the decimal degree coordinate 
+* A .csv file with accessions and coordinates. Note that this file must have one column called <em>Latitude<em> with latitude coordinates in
+  the decimal degree coordinate system, as well as one column called <em>Longitude<em> with longitude coordinates in the decimal degree coordinate 
   system. Name of column containing accession numbers does not matter.
 
 ## Running pipeline
 The pipeline is computationally heavy so slurm is advised
 
 Run with command:
-> bash prescreening_pipeline.sh <fasta file with  references for mapping> <txt file with accessions> <csv file with accessions and coordinates>
+> bash prescreening_pipeline.sh <em>fasta file with  references for mapping<em> <em>txt file with accessions<em> <em>csv file with accessions and coordinates<em>
 
 # Downloading full dataset
 If you want to download full sequences the following script is provided: download_complete_genomes.sh is provided.
