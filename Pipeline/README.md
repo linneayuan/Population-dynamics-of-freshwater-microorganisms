@@ -24,7 +24,7 @@ You will need to place the following files in the folder Raw_data:
 The pipeline is computationally heavy so slurm is advised
 
 Run with command:
-> bash prescreening_pipeline.sh <em>fasta file with  references for mapping</em> <em>txt file with accessions</em> <em>csv file with accessions and coordinates</em>
+> bash prescreening_pipeline.sh <fasta file with  references for mapping> <em>txt file with accessions</em> <em>csv file with accessions and coordinates</em>
 
 # Downloading full dataset
 If you want to download full sequences the following script is provided: download_complete_genomes.sh is provided.
