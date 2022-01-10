@@ -3,8 +3,8 @@ This pipeline will download 10% of sequences from the SRA database, map the sequ
 and filter for average coverage over 20x and 50 %cov. This way you can quickly do a prescreening of a number of metagenomes before actually
 downloading the whole set and performing any analysis. This pipeline can only download from the SRA database. 
 
-## Prerequisite files
-You will need:
+## Input files
+You will need to place the following files in the folder Raw_data:
 * A .fasta reference file with all your reference genomes (used for Bowtie2)
 
 * A .txt file with accession numbers, separated by row break. The accession numbers must start with ERR, SRR or DRR.
@@ -15,12 +15,13 @@ You will need:
 
 ## Running pipeline
 The pipeline is computationally heavy so slurm is advised
+
 Run with command:
 bash prescreening_pipeline.sh <fasta file with  references for mapping> <txt file with accessions> <csv file with accessions and coordinates>
 
-## Downloading full dataset
+# Downloading full dataset
+If you want to download full sequences the following script is provided: download_complete_genomes.sh is provided.
 The script is computationally heavy so slurm is advised
-If you want to download full sequences the script download_complete_genomes.sh is provided.
 
 Run with command:
 bash download_complete_genomes.sh <output directory for your .fastq files>
