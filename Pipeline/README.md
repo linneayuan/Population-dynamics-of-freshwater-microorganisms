@@ -3,6 +3,13 @@ This pipeline will download 10% of sequences from the SRA database, map the sequ
 and filter for average coverage over 20x and 50 %cov. This way you can quickly do a prescreening of a number of metagenomes before actually
 downloading the whole set and performing any analysis. This pipeline can only download from the SRA database. 
 
+## Prerequisite software
+You will need the following software
+
+* Bowtie2
+* sratools
+* samtools
+
 ## Input files
 You will need to place the following files in the folder Raw_data:
 * A .fasta reference file with all your reference genomes (used for Bowtie2)
@@ -11,7 +18,7 @@ You will need to place the following files in the folder Raw_data:
 
 * A .csv file with accessions and coordinates. Note that this file must have one column called <Latitude> with latitude coordinates in
   the decimal degree coordinate system, as well as one column called <Longitude> with longitude coordinates in the decimal degree coordinate 
-  system. A column with accession numbers is also necessary, name of column does not matter.
+  system. Name of column containing accession numbers does not matter.
 
 ## Running pipeline
 The pipeline is computationally heavy so slurm is advised
